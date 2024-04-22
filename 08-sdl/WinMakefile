@@ -1,0 +1,6 @@
+.PHONY: clean
+
+
+
+clean:
+	rmdir build /s /q
