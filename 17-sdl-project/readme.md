@@ -17,3 +17,4 @@ Apos esses passos o SDL deve ser instalado na pasta:
 C:\Program Files (x86)\SDL2
 faca o CMakeLists.txt do projeto crie o main.cpp
 e prossiga com o build normalmente
+Apos terminar se vc executar o .exe NAO IRA funcionar, isso porque voce deve copiar o arquivo SDL2.dll para onde esta o .exe
