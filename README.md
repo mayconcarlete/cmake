@@ -10,3 +10,9 @@
 ### ./Executable
 
 ### Podemos tambem fazer o build de uma parte especifica do codigo(como um build de uma library por exemplo, basta: cmake --build . --target NOME  ex: Library)
+
+para fazer o build da library
+cmake --build . --config Debug
+
+sudo cmake --install . --config Debug
+

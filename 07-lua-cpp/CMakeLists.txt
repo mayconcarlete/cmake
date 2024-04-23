@@ -7,4 +7,5 @@ file(GLOB lua_glob "./libs/lua/*.c")
 include_directories("./libs/lua")
 include_directories("./include")
 
+message(${lua_glob})
 add_executable(hello ${lua_glob} "./app/Main.cpp")
