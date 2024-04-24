@@ -8,7 +8,7 @@ C:\Users\maycon\libs\SDL
 and run the following command inside the folder:
 cmake -S . -B build
 inside the build folder run:
-cmake --build . --config Debug
+cmake --build . --config Debug ou cmake --build build(googletest)
 and then open the terminal in Administrator mode, navigate to the build folder again and then run:
 cmake --install . --config Debug
 OR if you wanna change the path, just use the --prefix
