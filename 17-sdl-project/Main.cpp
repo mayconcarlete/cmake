@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     SDL_Window* window;
     SDL_Renderer* renderer;
 
- if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
+ if(SDL_Init(SDL_INIT_VIDEO) != 0){
         fprintf(stderr, "Error initializing SDL.\n");
         return false;
     }
