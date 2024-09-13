@@ -6,6 +6,8 @@ project(
     CXX
 )
 
+set(CXX_STANDARD C++17)
+
 add_executable(
     main
     main.cpp
