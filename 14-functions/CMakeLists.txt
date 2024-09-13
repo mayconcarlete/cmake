@@ -1,34 +1,15 @@
-cmake_minimum_required(VERSION 3.22.0)
+cmake_minimum_required(VERSION 3.22)
 
-function(print_detail name_var)
-    message("My ${name_var} is ${${name_var}}")
-endfunction()
+project(
+    main
+    VERSION 1.0.0
+    LANGUAGES CXX
+)
 
-set(Name Maycon)
-set(Age 34)
-
-print_detail(Name)
-print_detail(Age)
+set(CXX_STANDARD C++17)
 
 
-# Function with default values
-function(print name_var)
-    if(DEFINED ARGV1)
-        message("Hello my default name is: ${ARGV1}")
-    else()
-        message("Hello my name is: ${name_var}")
-    endif()
-endfunction()
-
-set(Name2 Carolina)
-print(${Name2})
-print(Name Maykerops)
-
-# function that prints all arg types
-function(print_args Name)
-    message("ARGVC: ${ARGC}")
-    message("ARGV: ${ARGV}")
-    message("ARGN: ${ARGN}")
-endfunction()
-
-print_args(${Name} Iara Carolina Alice)
+add_executable(
+    main
+    main.cpp
+)
