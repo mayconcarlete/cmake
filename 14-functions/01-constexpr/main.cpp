@@ -9,7 +9,7 @@ constexpr ::uint32_t fatorial(std::uint32_t n){
     return result;
 }
 
-int main(){
+int main(int argv, char** argc){
     constexpr auto result = fatorial(5);
     std::cout << "Result: " << result << "\n";
     return EXIT_SUCCESS;
