@@ -20,3 +20,4 @@ add_executable(
 target_link_libraries(main PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 
 add_test(AllTestsInMain main)
+# cmake -S. -Bbuild -DCMAKE_TOOLCHAIN_FILE=C:\Users\mayco\dev\vcpkg\scripts\buildsystems\vcpkg.cmake
