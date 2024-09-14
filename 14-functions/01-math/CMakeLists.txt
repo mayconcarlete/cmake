@@ -7,26 +7,32 @@ project(
 )
 
 set(CXX_STANDARD ${CXX_STANDARD})
-set(IS_TEST ${IS_TEST})
+set(MODE ${MODE})
+
+
 
 include_directories(./src)
-
-# add_executable(
-#     main
-#     ./src/main.cpp
-#     ./src/math.cpp
-# )
-
-if(IS_TEST)
+#################################################
+# Build Unit Tests.
+#################################################
+if(${MODE} STREQUAL "UNIT_TEST")
+file(GLOB TEST_SRC_FILES "./test/*.cpp")
 enable_testing()
 add_test(main main)
 add_executable(
     main
     ./src/math.cpp
-    ./test/test_unit.cpp
-    ./test/test_math.cpp
+    ${TEST_SRC_FILES}
 )
 target_link_libraries(main ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 endif()
-
-
+#################################################
+# Build the code in Debug Mode.
+#################################################
+if(${MODE} STREQUAL "DEBUG")
+add_executable(
+    main
+    ./src/main.cpp
+    ./src/math.cpp
+)
+endif()
