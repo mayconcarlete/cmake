@@ -1,6 +1,7 @@
 {
   "cmake.sourceDirectory": "/home/maycon/dev/c/cmake/01-hello",
   "files.associations": {
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "cstdlib": "cpp"
   }
 }
