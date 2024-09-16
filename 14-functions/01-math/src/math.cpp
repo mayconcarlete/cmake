@@ -8,3 +8,8 @@ std::uint32_t fatorial(std::uint32_t n){
     }
     return result;
 }
+
+template <typename T>
+T sum(T a, T b){
+    return a + b;
+}

@@ -2,6 +2,7 @@
   "cmake.sourceDirectory": "/home/maycon/dev/c/cmake/01-hello",
   "files.associations": {
     "iostream": "cpp",
-    "cstdlib": "cpp"
+    "cstdlib": "cpp",
+    "valarray": "cpp"
   }
 }
