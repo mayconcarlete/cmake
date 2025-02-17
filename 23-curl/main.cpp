@@ -3,6 +3,7 @@
 #include "curl/curl.h"
 #include <memory>
 #include <cstdlib>
+#include "nlohmann/json.hpp"
 
 void GetRequest(){
     CURL *curl;
@@ -108,6 +109,14 @@ void PostRequestData(){
     std::cout << "response_string: " << response_string << std::endl;
     std::cout << "Header_string: " << header_string << std::endl;
     std::cout << "Elapsed: " << elapsed << std::endl;
+
+    nlohmann::json json;
+
+    auto response = json.parse(response_string);
+
+    std::cout << "Resultado final: " << response << std::endl;
+    std::cout << "Resultado hello: " << response["hello"] << std::endl;
+
 }
 
 int main(){
