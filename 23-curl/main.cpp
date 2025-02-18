@@ -133,7 +133,7 @@ void PostRequestData(){
 
   struct curl_slist *slist1 = NULL;
   slist1 = curl_slist_append(slist1, "Content-Type: application/json");
-  slist1 = curl_slist_append(slist1, "Content-Type: application/json");
+  slist1 = curl_slist_append(slist1, "Authorization: bearer token_here");
   slist1 = curl_slist_append(slist1, "Accept: application/json");
 
   curl_easy_setopt(curl, CURLOPT_HTTPHEADER, slist1);
