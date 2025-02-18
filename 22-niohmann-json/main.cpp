@@ -33,6 +33,6 @@ int main(){
     std::cout << "Size: " << sizeof(char) << std::endl;
     CTransport c;
     std::cout << "Size of class: " << sizeof(c) << std::endl;
-
+    
     return EXIT_SUCCESS;
 }

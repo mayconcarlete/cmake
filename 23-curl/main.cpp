@@ -40,41 +40,12 @@ void GetRequest(){
     curl_easy_cleanup(curl);
     return;
 }
-
-void PostRequest(){
-    CURL *curl;
-    CURLcode res;
- 
-    static const char *postthis = "moo mooo moo moossss";
- 
-  curl = curl_easy_init();
-  if(curl) {
-    curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:3000/");
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postthis);
- 
-    /* if we do not provide POSTFIELDSIZE, libcurl calls strlen() by itself */
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)strlen(postthis));
- 
-    /* Perform the request, res gets the return code */
-    res = curl_easy_perform(curl);
-    /* Check for errors */
-    if(res != CURLE_OK)
-      fprintf(stderr, "curl_easy_perform() failed: %s\n",
-              curl_easy_strerror(res));
- 
-    /* always cleanup */
-    curl_easy_cleanup(curl);
-  }
-  return;
-}
-
-
 size_t writeFunction(void *ptr, size_t size, size_t nmemb, std::string *data){
   data->append((char*)ptr, size * nmemb);
   return size*nmemb;
 }
 
-void PostRequestData(){
+void GetRequestData(){
     auto curl = curl_easy_init();
     if(!curl){
       std::cout << "Exiting..." << std::endl;
@@ -119,9 +90,63 @@ void PostRequestData(){
 
 }
 
+void PostRequest(){
+    CURL *curl;
+    CURLcode res;
+ 
+    static const char *postthis = "moo mooo moo moossss";
+ 
+  curl = curl_easy_init();
+  if(curl) {
+    curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:3000/");
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postthis);
+ 
+    /* if we do not provide POSTFIELDSIZE, libcurl calls strlen() by itself */
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long)strlen(postthis));
+ 
+    /* Perform the request, res gets the return code */
+    res = curl_easy_perform(curl);
+    /* Check for errors */
+    if(res != CURLE_OK)
+      fprintf(stderr, "curl_easy_perform() failed: %s\n",
+              curl_easy_strerror(res));
+ 
+    /* always cleanup */
+    curl_easy_cleanup(curl);
+  }
+  return;
+}
+
+void PostRequestData(){
+  auto curl = curl_easy_init();
+  if(!curl){
+    std::cout << "Exiting with an error, curl is null." << std::endl;
+    return;
+  }
+
+  curl_easy_setopt(curl, CURLOPT_URL , "http://localhost:3000");
+  curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
+  curl_easy_setopt(curl, CURLOPT_USERAGENT, "curl/7.42.0");
+  curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 50L);
+  curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1L);
+  const char *json = "{\"name\": \"daniel\"}";
+
+  struct curl_slist *slist1 = NULL;
+  slist1 = curl_slist_append(slist1, "Content-Type: application/json");
+  slist1 = curl_slist_append(slist1, "Content-Type: application/json");
+  slist1 = curl_slist_append(slist1, "Accept: application/json");
+
+  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, slist1);
+  curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json);
+
+  curl_easy_perform(curl);
+  curl_easy_cleanup(curl);
+}
+
 int main(){
     // GetRequest();
     // PostRequest();
+    // GetRequestData();
     PostRequestData();
     return EXIT_SUCCESS;
 }
