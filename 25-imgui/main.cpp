@@ -135,7 +135,7 @@ int main(int, char**)
         glfwPollEvents();
         if (glfwGetWindowAttrib(window, GLFW_ICONIFIED) != 0)
         {
-            ImGui_ImplGlfw_Sleep(10);
+            // ImGui_ImplGlfw_Sleep(10); Ajeitar isso depois
             continue;
         }
 
@@ -170,6 +170,23 @@ int main(int, char**)
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
             ImGui::End();
         }
+
+        auto calculatorFlag = true;
+       static int num1=0, num2=0, result=0;
+
+        ImGui::Begin("My calculator", &calculatorFlag);
+
+            ImGui::Text("Biro Liro");
+            ImGui::InputInt("Num1", &num1, 0);
+            ImGui::InputInt("Num2", &num2, 0);
+            
+            if(ImGui::Button("Somar")){
+                result = num1 + num2;
+            }
+            
+            ImGui::Text("Result %d", result);
+        ImGui::End();
+
 
         // 3. Show another simple window.
         if (show_another_window)
