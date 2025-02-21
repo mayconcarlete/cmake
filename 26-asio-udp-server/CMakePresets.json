@@ -1,0 +1,29 @@
+{
+  "version": 8,
+  "configurePresets": [
+    {
+      "name": "debug",
+      "displayName": "debug",
+      "generator": "Unix Makefiles",
+      "binaryDir": "build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "MODE": "DEBUG",
+        "CXX_STANDARD": "c++17",
+        "CMAKE_TOOLCHAIN_FILE": "C:/Users/mayco/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      }
+    },
+    {
+      "name": "linux",
+      "displayName": "test",
+      "generator": "Unix Makefiles",
+      "binaryDir": "build/linux",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "MODE": "UNIT_TEST",
+        "CXX_STANDARD": "c++17",
+        "CMAKE_TOOLCHAIN_FILE": "/home/maycon/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      }
+    }
+  ]
+}
