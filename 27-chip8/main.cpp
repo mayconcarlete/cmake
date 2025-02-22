@@ -11,6 +11,7 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include <stdio.h>
+#include <GL/glew.h>
 #define GL_SILENCE_DEPRECATION
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 #include <GLES2/gl2.h>
@@ -117,14 +118,23 @@ int main(int, char**)
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-    float vertex[] = {
+    float vertices[] = {
         -0.5f, -0.5f, 0,
         0.5f, -0.5f, 0,
         0.0f, 0.5f, 0,
     };
-        
+    
+    // Copiar os vertices do triângulo para a memória da GPU.
+    GLuint VertexBuffer;
 
+    // Pedir para o OpenGL gerar o identificador do VertexBuffer.
+    glGenBuffers(1, &VertexBuffer);
 
+    // ativar o vertex buffer como sendo o buffer para onde vamos copiar os dados do triângulo
+    glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
+
+    // copiar os dados para a memória de vídeo
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     // Main loop
 #ifdef __EMSCRIPTEN__
@@ -207,6 +217,9 @@ int main(int, char**)
             ImGui::End();
         }
         
+
+
+
         // Rendering
         ImGui::Render();
         int display_w, display_h;
