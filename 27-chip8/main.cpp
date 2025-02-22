@@ -6,7 +6,7 @@
 // - Getting Started      https://dearimgui.com/getting-started
 // - Documentation        https://dearimgui.com/docs (same as your local docs/ folder).
 // - Introduction, links and more at the top of imgui.cpp
-
+#include <iostream>
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -78,6 +78,14 @@ int main(int, char**)
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
 
+
+
+    if(glewInit() != GLEW_OK){
+        std::cout << "Error initializing Glew" << std::endl;
+        glfwTerminate();
+        return 1;
+    }   
+
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -135,6 +143,7 @@ int main(int, char**)
 
     // copiar os dados para a memória de vídeo
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glClearColor(1.0f, 0.0f, 0.0f, 1.0);
 
     // Main loop
 #ifdef __EMSCRIPTEN__
@@ -154,7 +163,7 @@ int main(int, char**)
         glfwPollEvents();
         if (glfwGetWindowAttrib(window, GLFW_ICONIFIED) != 0)
         {
-            ImGui_ImplGlfw_Sleep(10);
+            // ImGui_ImplGlfw_Sleep(10);
             continue;
         }
 
@@ -229,6 +238,15 @@ int main(int, char**)
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         
+
+        glEnableVertexAttribArray(0);
+
+        glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer); // diz para o opengl que o vertex buffer vai ser o buffer ativo no momento.
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr); // Informa ao OpenGL onde, dentro do VertexBuffer, os vértices estão. No caso do array Vertex
+        glDrawArrays(GL_TRIANGLES, 0, 3); // o shape que será desenhado, qual a posicao do primeiro triangulo, e quantos vertices formam o shape no caso 1 triangulo, logo, 3).
+	// Agora que desenhamos o triângulo, podemos desabilitar o atributo da posição
+		glDisableVertexAttribArray(0);
+
         glfwSwapBuffers(window);
     }
 #ifdef __EMSCRIPTEN__
