@@ -1,29 +1,14 @@
 {
-    "name": "gui",
-    "version-string": "0.1.0",
-    "dependencies": [
-        {
-            "name": "fmt"
-        },
-        {
-            "name": "opengl"
-        },
-        {
-            "name": "glfw3"
-        },
-        {
-            "name": "imgui",
-            "default-features": false,
-            "features": [
-                "glfw-binding",
-                "opengl3-binding"
-            ]
-        },
-        {
-            "name": "implot"
-        },
-        {
-            "name": "glew"
-        }
-    ]
+  "name": "imguichip8",
+  "version-string": "0.1.0",
+  "dependencies": [
+    {
+      "name": "sdl2"
+    },
+    {
+      "name": "imgui",
+      "default-features": false,
+      "features": ["sdl2-binding", "sdl2-renderer-binding"]
+    }
+  ]
 }
