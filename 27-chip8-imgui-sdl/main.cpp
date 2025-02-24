@@ -15,8 +15,16 @@ int main(){
        SDL_WINDOW_SHOWN
        );
 
-    SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
+    if(window == NULL){
+      std::cout << "SDL Window Error: " << SDL_GetError() << std::endl;
+    }
+
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
     
+    if(renderer == NULL){
+      std::cout << "SDL Renderer Error: " << SDL_GetError() << std::endl;
+    }
+
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
@@ -24,7 +32,11 @@ int main(){
     ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
 
     ImGui_ImplSDLRenderer2_Init(renderer);
-
+  SDL_Rect rect;
+    rect.x = 0;
+    rect.y = 0;
+    rect.h = 100;
+    rect.w = 100;
    while(true){
      SDL_Event event;
      while(SDL_PollEvent(&event)){
@@ -36,8 +48,15 @@ int main(){
        }
      }
 
-    SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 120, 180, 255, 255);
+    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+    // SDL_RenderDrawRect(renderer, &rect); // desenha sem preencher a are do retangulo.
+    SDL_RenderFillRect(renderer, &rect); // preenche toda a area do retangulo.
+    
+
+
 
     ImGui_ImplSDLRenderer2_NewFrame();
     ImGui_ImplSDL2_NewFrame();
@@ -53,6 +72,12 @@ int main(){
 
     SDL_RenderPresent(renderer);
    }
+
+
+
+
+
+
 
     ImGui_ImplSDLRenderer2_Shutdown();
     ImGui_ImplSDL2_Shutdown();
