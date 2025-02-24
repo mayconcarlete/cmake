@@ -32,17 +32,22 @@ int main(){
     ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
 
     ImGui_ImplSDLRenderer2_Init(renderer);
+
+    ImGui_ImplSDLRenderer2_NewFrame();
+    ImGui_ImplSDL2_NewFrame();
+
   SDL_Rect rect;
     rect.x = 0;
     rect.y = 0;
     rect.h = 100;
     rect.w = 100;
-   while(true){
+    bool shouldCloseWindow{false};
+   while(!shouldCloseWindow){
      SDL_Event event;
      while(SDL_PollEvent(&event)){
         ImGui_ImplSDL2_ProcessEvent(&event);
-       if( event.type == SDL_QUIT ){
-         exit(0);
+       if( event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE ){
+          shouldCloseWindow = true;
        }else if( event.type == SDL_MOUSEBUTTONDOWN ){
         
        }
@@ -58,16 +63,14 @@ int main(){
 
 
 
-    ImGui_ImplSDLRenderer2_NewFrame();
-    ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
-    
-
+    ////////////////////////////////////////////////////////////
+    //  Draw all imgui widgets here.
+    ////////////////////////////////////////////////////////////
     ImGui::Begin("Hello, Dear ImGui with SDL2");
     ImGui::Text("This is just a basic Hello World!");
     ImGui::End();
     ImGui::Render();
-    
     ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), renderer);
 
     SDL_RenderPresent(renderer);
