@@ -4,15 +4,19 @@
 #include <imgui.h>
 #include <imgui_impl_sdl2.h>
 #include <imgui_impl_sdlrenderer2.h>
+
+#include <Config.hpp>
 #include <Chip8.hpp>
+#include <Chip8Memory.hpp>
 
 int main(){
   SDL_Init(SDL_INIT_EVERYTHING);
 
   SDL_Window* window = SDL_CreateWindow(
-      "SDL2 It's Works!",
-      50, 30,
-      1280, 720,
+      EMULATOR_WINDOW_TITLE,
+      SDL_WINDOWPOS_UNDEFINED,
+      SDL_WINDOWPOS_UNDEFINED,
+      1024, 860,
       SDL_WINDOW_SHOWN
       );
 
@@ -25,6 +29,9 @@ int main(){
   if(renderer == NULL){
     std::cout << "SDL Renderer Error: " << SDL_GetError() << std::endl;
   }
+
+  auto memory = Memory();
+  auto chip8 = Chip8(memory);
 
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
