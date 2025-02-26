@@ -8,6 +8,7 @@
 #include <Config.hpp>
 #include <Chip8.hpp>
 #include <Chip8Memory.hpp>
+#include <Chip8Registers.hpp>
 
 int main(){
   SDL_Init(SDL_INIT_EVERYTHING);
@@ -32,7 +33,9 @@ int main(){
 
   auto memory = Memory();
   auto chip8 = Chip8(memory);
-
+  chip8.m_memory.Set(0xFF, 0x4D);
+  std::cout << "unsigned short size:  " << sizeof(unsigned short) <<std::endl;
+  std::cout << "unsigned short size:  " << sizeof(unsigned char) <<std::endl;
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO& io = ImGui::GetIO();

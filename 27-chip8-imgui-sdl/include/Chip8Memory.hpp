@@ -1,16 +1,16 @@
 #ifndef CHIP8_MEMORY_H
 #define CHIP8_MEMORY_H
 
-#include <vector>
+#include <array>
 #include <Config.hpp>
 
 class Memory {
     public:
-        void Set(int index, unsigned char value);
-        unsigned char Get(int index);
+        void Set(int index, OneByte value);
+        OneByte Get(int index);
     private: 
         void CheckMemoryBoundary(int index);
-        unsigned char m_memory[CHIP8_MEMORY_SIZE];
+        std::array<OneByte, CHIP8_MEMORY_SIZE> memory;
 };
 
 #endif

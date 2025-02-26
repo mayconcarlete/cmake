@@ -11,10 +11,10 @@ void Memory::CheckMemoryBoundary(int index){
 
 void Memory::Set(int index, unsigned char value){
     CheckMemoryBoundary(index);
-    m_memory[index] = value;
+    memory[index] = value;
 }
 
 unsigned char Memory::Get(int index){
      CheckMemoryBoundary(index);
-    return m_memory[index]; 
+    return memory[index]; 
 }
