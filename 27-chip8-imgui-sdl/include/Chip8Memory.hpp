@@ -9,7 +9,6 @@ class Memory {
         void Set(int index, OneByte value);
         OneByte Get(int index);
     private: 
-        void CheckMemoryBoundary(int index);
         std::array<OneByte, CHIP8_MEMORY_SIZE> memory;
 };
 

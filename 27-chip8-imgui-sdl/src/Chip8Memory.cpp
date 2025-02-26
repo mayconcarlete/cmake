@@ -5,7 +5,7 @@
 #include <Config.hpp>
 
 
-void Memory::CheckMemoryBoundary(int index){
+void CheckMemoryBoundary(int index){
     assert(index >= 0  && index < CHIP8_MEMORY_SIZE);
 }
 

@@ -6,9 +6,10 @@
 #include <imgui_impl_sdlrenderer2.h>
 
 #include <Config.hpp>
-#include <Chip8.hpp>
 #include <Chip8Memory.hpp>
 #include <Chip8Registers.hpp>
+#include <Chip8Stack.hpp>
+#include <Chip8.hpp>
 
 int main(){
   SDL_Init(SDL_INIT_EVERYTHING);
@@ -32,10 +33,18 @@ int main(){
   }
 
   auto memory = Memory();
-  auto chip8 = Chip8(memory);
-  chip8.m_memory.Set(0xFF, 0x4D);
-  std::cout << "unsigned short size:  " << sizeof(unsigned short) <<std::endl;
-  std::cout << "unsigned short size:  " << sizeof(unsigned char) <<std::endl;
+  Registers registers;
+  auto stack = Stack();
+  auto chip8 = Chip8(memory, registers, stack);
+  chip8.registers.stack_pointer = 0;
+
+  chip8.stack.push(0xFF, chip8.registers);
+  const TwoBytes value = chip8.stack.pop(chip8.registers); 
+  std::cout << "Value: " << value << "\n";
+
+
+
+  
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO& io = ImGui::GetIO();

@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.30.0)
 project(main LANGUAGES CXX)
 
 
-file(GLOB Source "./src/*.cpp")
 include_directories("./include")
+file(GLOB Source "./src/*.cpp")
 
 
 find_package(SDL2 REQUIRED)
