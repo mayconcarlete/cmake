@@ -9,7 +9,7 @@
 #include <Chip8Memory.hpp>
 #include <Chip8Registers.hpp>
 #include <Chip8Stack.hpp>
-#include <Chip8.hpp>
+#include <Chip8Cpu.hpp>
 
 int main(){
   SDL_Init(SDL_INIT_EVERYTHING);
@@ -35,7 +35,7 @@ int main(){
   auto memory = Memory();
   Registers registers;
   auto stack = Stack();
-  auto chip8 = Chip8(memory, registers, stack);
+  auto chip8 = Chip8Cpu(memory, registers, stack);
   chip8.registers.stack_pointer = 0;
 
   chip8.stack.push(0xFF, chip8.registers);

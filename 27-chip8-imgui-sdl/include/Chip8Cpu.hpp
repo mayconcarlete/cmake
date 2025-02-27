@@ -6,13 +6,17 @@
 #include <Chip8Registers.hpp>
 #include <Chip8Stack.hpp>
 
-class Chip8{
+class Chip8Cpu{
     public:
-        Chip8(Memory memory, Registers registers, Stack stack);
-        ~Chip8() = default;
         Memory memory;
         Registers registers;
         Stack stack;
+        
+        Chip8Cpu(Memory memory, Registers registers, Stack stack);
+        ~Chip8Cpu() = default;
+        void check_stack_in_bounds();
+        void push_stack(TwoBytes value);
+        TwoBytes pop_stack();
 };
 
 
