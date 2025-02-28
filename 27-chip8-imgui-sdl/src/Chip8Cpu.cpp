@@ -1,13 +1,13 @@
 #include <iostream>
+#include <cassert>
+
 #include <Chip8Cpu.hpp>
 #include <Chip8Memory.hpp>
 #include <Chip8Registers.hpp>
 #include <Chip8Stack.hpp>
 #include <Config.hpp>
-#include <cassert>
 
 void Chip8Cpu::check_stack_in_bounds(){
-    
     assert(registers.stack_pointer < CHIP8_TOTAL_STACK_DEPTH);
 }
 

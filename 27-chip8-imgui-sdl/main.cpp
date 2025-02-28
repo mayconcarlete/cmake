@@ -36,11 +36,13 @@ int main(){
   Registers registers;
   auto stack = Stack();
   auto chip8 = Chip8Cpu(memory, registers, stack);
-  chip8.registers.stack_pointer = 0;
+  
+  chip8.push_stack(0xFF);
+  chip8.push_stack(0xaa);
 
-  chip8.stack.push(0xFF, chip8.registers);
-  const TwoBytes value = chip8.stack.pop(chip8.registers); 
-  std::cout << "Value: " << value << "\n";
+  std::cout << "pop: " << chip8.pop_stack() <<std::endl;
+  std::cout << "pop: " << chip8.pop_stack() <<std::endl;
+
 
 
 
