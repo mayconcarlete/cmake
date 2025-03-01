@@ -106,13 +106,16 @@ int main(){
             {
                 ImGui::TableNextRow();
                 ImGui::TableNextColumn();
+                
                 ImGui::Text("%d", row);
                 ImGui::TableNextColumn();
+                
+                std::string message = chip8.stack.stack[row] == 0 ? "0x00" : "0x%x";
+                ImGui::Text(message.c_str(), chip8.stack.stack[row]);
+                ImGui::TableNextColumn();
+                
                 std::string value = std::to_string(chip8.stack.stack[row]);
-
-
-
-                // ImGui::Text();
+                ImGui::Text("%s", value.c_str());
             }
     ImGui::EndTable();
     ImGui::End();
