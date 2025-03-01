@@ -40,13 +40,15 @@ int main(){
   chip8.push_stack(0xFF);
   chip8.push_stack(0xaa);
 
-  std::cout << "pop: " << chip8.pop_stack() <<std::endl;
-  std::cout << "pop: " << chip8.pop_stack() <<std::endl;
+  // std::string buff;
+  // char buff[10];
+  // sprintf(buff, "%x", chip8.pop_stack());
+  // sprintf(buff, "%x", chip8.pop_stack());
+  // std::cout << "Errado: " << *buff << std::endl;
+
+  // sprintf(buff, "%x", chip8.pop_stack());
 
 
-
-
-  
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO& io = ImGui::GetIO();
@@ -92,7 +94,35 @@ int main(){
     ImGui::Begin("Hello, Dear ImGui with SDL2");
     ImGui::Text("This is just a basic Hello World!");
     ImGui::End();
+
+    ImGui::Begin("Stack Information");
+    ImGui::BeginTable("Stack Information", 3);
+                ImGui::TableSetupColumn("Position");
+                ImGui::TableSetupColumn("Value Hex");
+                ImGui::TableSetupColumn("Value Int");
+                ImGui::TableHeadersRow();
+
+       for (int row = 0; row < CHIP8_TOTAL_STACK_DEPTH; row++)
+            {
+                ImGui::TableNextRow();
+                ImGui::TableNextColumn();
+                ImGui::Text("%d", row);
+                ImGui::TableNextColumn();
+                std::string value = std::to_string(chip8.stack.stack[row]);
+
+
+
+                // ImGui::Text();
+            }
+    ImGui::EndTable();
+    ImGui::End();
+
     ImGui::Render();
+
+
+
+
+
     ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), renderer);
 
     SDL_RenderPresent(renderer);
