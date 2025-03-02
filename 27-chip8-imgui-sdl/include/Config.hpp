@@ -10,6 +10,7 @@
 
 #define CHIP8_WINDOW_MULTIPLIER 10
 #define CHIP8_TOTAL_STACK_DEPTH 16
+#define CHIP8_KEYBOARD_TOTAL_KEYS 16
 
 typedef unsigned char OneByte; // 8 bits representation - 0 to 0xFF.
 typedef unsigned short TwoBytes; // 16 bits representation - 0 to 0xFFFF.

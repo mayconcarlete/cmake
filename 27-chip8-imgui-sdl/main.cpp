@@ -5,6 +5,7 @@
 #include <imgui_impl_sdl2.h>
 #include <imgui_impl_sdlrenderer2.h>
 
+#include <Chip8Keyboard.hpp>
 #include <Config.hpp>
 #include <Chip8Memory.hpp>
 #include <Chip8Registers.hpp>
@@ -39,15 +40,21 @@ int main(){
   
   chip8.push_stack(0xFF);
   chip8.push_stack(0xaa);
+  
+  auto keyboard = Keyboard();
+  keyboard.key_down(0x0f);
+  keyboard.key_down(0);
 
-  // std::string buff;
-  // char buff[10];
-  // sprintf(buff, "%x", chip8.pop_stack());
-  // sprintf(buff, "%x", chip8.pop_stack());
-  // std::cout << "Errado: " << *buff << std::endl;
+  std::cout << "Keyy 15: " << keyboard.is_key_down(15) << "\n";
+  std::cout << "Keyy 0: " << keyboard.is_key_down(0) << "\n";
 
-  // sprintf(buff, "%x", chip8.pop_stack());
+  keyboard.key_up(0x0f);
+  keyboard.key_up(0);
 
+  std::cout << "Keyy 15: " << keyboard.is_key_down(15) << "\n";
+  std::cout << "Keyy 0: " << keyboard.is_key_down(0) << "\n";
+  
+  std::cout << "Map Key: " << keyboard.get_map_key(0x00) << "\n";
 
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
