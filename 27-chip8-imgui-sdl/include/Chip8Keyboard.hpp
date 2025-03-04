@@ -8,10 +8,17 @@
 
 class Keyboard {
     public:
+        std::array<char, CHIP8_KEYBOARD_TOTAL_KEYS> screen_map {
+            49, 50, 51, 67,
+            52, 53, 54, 68,
+            55, 56, 57, 69,
+            65, 48, 66, 70
+        };
         std::array<char, CHIP8_KEYBOARD_TOTAL_KEYS> map_keys{
-            SDLK_0, SDLK_1, SDLK_2, SDLK_4, SDLK_5,
-            SDLK_6, SDLK_7, SDLK_8, SDLK_9, SDLK_a, 
-            SDLK_b, SDLK_c, SDLK_d, SDLK_e, SDLK_f, 
+            SDLK_0, SDLK_1, SDLK_2, SDLK_3, SDLK_4, 
+            SDLK_5, SDLK_6, SDLK_7, SDLK_8, SDLK_9,
+            SDLK_a, SDLK_b, SDLK_c, SDLK_d, SDLK_e,
+            SDLK_f, 
         };
         std::array<bool, CHIP8_KEYBOARD_TOTAL_KEYS> keyboard;
         void key_down(int key);

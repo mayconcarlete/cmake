@@ -81,6 +81,18 @@ int main(){
         shouldCloseWindow = true;
       }else if( event.type == SDL_MOUSEBUTTONDOWN ){
 
+      } else if(event.type == SDL_KEYDOWN){
+        for(int i = 0; i < CHIP8_KEYBOARD_TOTAL_KEYS; i++){
+          if(event.key.keysym.sym == keyboard.map_keys[i]){
+            keyboard.key_down(event.key.keysym.sym);
+          }
+        }
+      }else if(event.type == SDL_KEYUP){
+        for(int i = 0; i < CHIP8_KEYBOARD_TOTAL_KEYS; i++){
+          if(event.key.keysym.sym == keyboard.map_keys[i]){
+            keyboard.key_up(event.key.keysym.sym);
+          }
+        }
       }
     }
 
@@ -102,6 +114,9 @@ int main(){
     ImGui::Text("This is just a basic Hello World!");
     ImGui::End();
 
+    ////////////////////
+    // Stack
+    ///////////////////
     ImGui::Begin("Stack Information");
     ImGui::BeginTable("Stack Information", 3);
                 ImGui::TableSetupColumn("Position");
@@ -124,6 +139,41 @@ int main(){
                 std::string value = std::to_string(chip8.stack.stack[row]);
                 ImGui::Text("%s", value.c_str());
             }
+    ImGui::EndTable();
+
+    // ImGui::BeginTable("Keyboard Information", 4);
+    // ImGui::EndTable();
+
+    ImGui::End();
+
+    // ////////////////////
+    // // Keybaord
+    // ///////////////////
+
+
+
+
+    ImGui::Begin("Keyboard Information");
+    ImGui::BeginTable("Keyboard", 4);
+
+    // ImGui::TableHeadersRow();
+    ImGui::TableNextRow();
+    ImGui::TableNextColumn();
+
+    // for(int i = 0; i < 4; i++){
+    //   for(int j = 0; j < 4; j++){
+    //     const auto index = (j * 4) + i;
+    //     int key = keyboard.screen_map[index];
+    //     const auto iskeydown = keyboard.is_key_down(key);
+    //     std::cout << "Pressionada sim, colorir!!! << "<< key << iskeydown << "\n";
+    //     ImGui::Text("%c",key);
+    //   }
+
+    //   ImGui::TableNextColumn();
+
+    // }
+
+
     ImGui::EndTable();
     ImGui::End();
 
