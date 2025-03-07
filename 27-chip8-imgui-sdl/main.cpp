@@ -11,6 +11,8 @@
 #include <Chip8Registers.hpp>
 #include <Chip8Stack.hpp>
 #include <Chip8Cpu.hpp>
+// #include <format>
+#include <sstream>
 
 int main(){
   SDL_Init(SDL_INIT_EVERYTHING);
@@ -42,19 +44,6 @@ int main(){
   chip8.push_stack(0xaa);
   
   auto keyboard = Keyboard();
-  keyboard.key_down(0x0f);
-  keyboard.key_down(0);
-
-  std::cout << "Keyy 15: " << keyboard.is_key_down(15) << "\n";
-  std::cout << "Keyy 0: " << keyboard.is_key_down(0) << "\n";
-
-  keyboard.key_up(0x0f);
-  keyboard.key_up(0);
-
-  std::cout << "Keyy 15: " << keyboard.is_key_down(15) << "\n";
-  std::cout << "Keyy 0: " << keyboard.is_key_down(0) << "\n";
-  
-  std::cout << "Map Key: " << keyboard.get_map_key(0x00) << "\n";
 
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
@@ -128,8 +117,10 @@ int main(){
             {
                 ImGui::TableNextRow();
                 ImGui::TableNextColumn();
-                
-                ImGui::Text("%d", row);
+                std::stringstream buffer;
+                buffer << std::hex << row;
+                std::string index = buffer.str();
+                ImGui::Text("%s",index.c_str());
                 ImGui::TableNextColumn();
                 
                 std::string message = chip8.stack.stack[row] == 0 ? "0x00" : "0x%x";
@@ -140,19 +131,25 @@ int main(){
                 ImGui::Text("%s", value.c_str());
             }
     ImGui::EndTable();
+    ImGui::End();
 
-    // ImGui::BeginTable("Keyboard Information", 4);
-    // ImGui::EndTable();
+    ImGui::Begin("Interpreter Memory");
+    ImGui::BeginTable("a", 16);
+            for(int i = 0; i < 16; i++){
+              // sstring.clear();
+              std::stringstream sstring; // to convert int into char
+              sstring << std::hex << i;
+              std::string str = sstring.str();
+              ImGui::TableSetupColumn(str.c_str());
+            }
+            ImGui::TableHeadersRow();
 
+    ImGui::EndTable();
     ImGui::End();
 
     // ////////////////////
     // // Keybaord
     // ///////////////////
-
-
-
-
     ImGui::Begin("Keyboard Information");
     ImGui::BeginTable("Keyboard", 4);
 

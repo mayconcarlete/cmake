@@ -3,9 +3,12 @@
 
 #include <array>
 #include <Config.hpp>
+#include <cstring>
 
 class Memory {
     public:
+        Memory();
+        ~Memory() = default;
         void Set(int index, OneByte value);
         OneByte Get(int index);
     private: 
