@@ -1,5 +1,5 @@
 {
-  "cmake.sourceDirectory": "/home/maycon/dev/cmake/23-curl/build/linux/vcpkg_installed/x64-linux/share/vcpkg-cmake-get-vars/cmake_get_vars",
+  "cmake.sourceDirectory": "/home/maycon/dev/cmake/01-hello",
   "files.associations": {
     "iostream": "cpp",
     "cstdlib": "cpp",

@@ -11,7 +11,7 @@
 #include <Chip8Registers.hpp>
 #include <Chip8Stack.hpp>
 #include <Chip8Cpu.hpp>
-// #include <format>
+#include <Chip8Screen.hpp>
 #include <sstream>
 
 int main(){
@@ -38,7 +38,8 @@ int main(){
   auto memory = Memory();
   Registers registers;
   auto stack = Stack();
-  auto chip8 = Chip8Cpu(memory, registers, stack);
+  auto screen = Screen();
+  auto chip8 = Chip8Cpu(memory, registers, stack, screen);
   
   chip8.push_stack(0xFF);
   chip8.push_stack(0xaa);
@@ -56,11 +57,7 @@ int main(){
   ImGui_ImplSDLRenderer2_NewFrame();
   ImGui_ImplSDL2_NewFrame();
 
-  SDL_Rect rect;
-  rect.x = 0;
-  rect.y = 0;
-  rect.h = 100;
-  rect.w = 100;
+
   bool shouldCloseWindow{false};
   while(!shouldCloseWindow){
     SDL_Event event;
@@ -87,10 +84,26 @@ int main(){
 
     SDL_SetRenderDrawColor(renderer, 120, 180, 255, 255);
     SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    // SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    
+    chip8.screen.set(0, 0);
+    chip8.screen.set(10, 10);
 
-    // SDL_RenderDrawRect(renderer, &rect); // desenha sem preencher a are do retangulo.
-    SDL_RenderFillRect(renderer, &rect); // preenche toda a area do retangulo.
+    for(int x = 0; x < CHIP8_WIDTH; x++){
+      for (int y = 0; y < CHIP8_HEIGHT; y++){
+        // SDL_RenderDrawRect(renderer, &rect); // desenha sem preencher a are do retangulo.
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+        if(chip8.screen.is_set(x, y)){
+          SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        }
+        SDL_Rect rect;
+        rect.x = x * CHIP8_WINDOW_MULTIPLIER;
+        rect.y = y * CHIP8_WINDOW_MULTIPLIER;
+        rect.w = CHIP8_WINDOW_MULTIPLIER;
+        rect.h = CHIP8_WINDOW_MULTIPLIER;
+        SDL_RenderFillRect(renderer, &rect); // preenche toda a area do retangulo.
+      }
+    }
 
 
 
@@ -134,6 +147,20 @@ int main(){
     ImGui::End();
 
     ImGui::Begin("Interpreter Memory");
+    ImGui::BeginTable("a", 16);
+            for(int i = 0; i < 16; i++){
+              // sstring.clear();
+              std::stringstream sstring; // to convert int into char
+              sstring << std::hex << i;
+              std::string str = sstring.str();
+              ImGui::TableSetupColumn(str.c_str());
+            }
+            ImGui::TableHeadersRow();
+
+    ImGui::EndTable();
+    ImGui::End();
+
+    ImGui::Begin("Memory");
     ImGui::BeginTable("a", 16);
             for(int i = 0; i < 16; i++){
               // sstring.clear();
