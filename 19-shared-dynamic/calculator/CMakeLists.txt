@@ -1,6 +1,6 @@
 add_library(
     calculator
-    STATIC
+    SHARED
     ./src/calculator.cpp
 )
 
