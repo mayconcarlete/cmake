@@ -20,7 +20,6 @@
       "binaryDir": "build/linux",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "MODE": "UNIT_TEST",
         "CXX_STANDARD": "c++17",
         "CMAKE_TOOLCHAIN_FILE": "/home/maycon/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"
       }
