@@ -18,8 +18,6 @@ std::expected<std::int32_t, Err> sum(const int a, const int b){
 
 int main(){
   std::cout << "Versão desconhecida: " << __cplusplus << "\n";
-  
-
   std::cout << "CXX_VERSION_STRING: " << CXX_VERSION_STRING << "\n";
 
   std::cout << "Hello World!" << std::endl;
