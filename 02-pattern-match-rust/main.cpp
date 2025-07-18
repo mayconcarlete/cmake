@@ -3,11 +3,11 @@
 #include <cstdint>
 
 template <typename T, typename E, typename FSuccess, typename FError>
-void match(const std::expected<T, E>& exp, FSuccess onSuccess, FError onError){
-  if(exp.has_value()){
-    onSuccess(exp.value());
+void match(const std::expected<T, E>& expected_result, FSuccess onSuccess, FError onError){
+  if(expected_result.has_value()){
+    onSuccess(expected_result.value());
   } else {
-    onError(exp.error());
+    onError(expected_result.error());
   }
 }
 
