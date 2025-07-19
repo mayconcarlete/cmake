@@ -3,28 +3,32 @@
 #include <queue>
 #include <mutex>
 #include <chrono>
+#include <memory>
 
-std::queue<int> buffer;
-std::mutex buffer_mutex;
 bool done = false;
 
-void producer(){
+struct SharedData {
+    std::queue<int> queue;
+    std::mutex mutex;
+};
+
+void producer(std::shared_ptr<SharedData> shared_data){
     for(int i = 0; i < 10; ++i){
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        std::lock_guard<std::mutex> lock(buffer_mutex);
-        buffer.push(i);
+        std::lock_guard<std::mutex> lock(shared_data->mutex);
+        shared_data->queue.push(i);
         std::cout << "Producer: " << i << "\n";
     }
-    std::lock_guard<std::mutex> lock(buffer_mutex);
+    std::lock_guard<std::mutex> lock(shared_data->mutex);
     done = true;
 }
 
-void consumer(){
+void consumer(std::shared_ptr<SharedData> shared_data){
     while(true){
-        std::lock_guard<std::mutex> lock(buffer_mutex);
-        if(!buffer.empty()){
-            int value = buffer.front();
-            buffer.pop();
+        std::lock_guard<std::mutex> lock(shared_data->mutex);
+        if(!shared_data->queue.empty()){
+            int value = shared_data->queue.front();
+            shared_data->queue.pop();
             std::cout << "Consumer: " << value << "\n";
         } else if(done ){
             break;
@@ -34,12 +38,13 @@ void consumer(){
 
 
 
-
 int main() {
-    std::thread t1(producer);
-    std::thread t2(consumer);
+    auto shared_data = std::make_shared<SharedData>();
 
-    t1.join();
-    t2.join();
+    std::thread prod(producer, shared_data);
+    std::thread cons(consumer, shared_data);
+
+    prod.join();
+    cons.join();
     return EXIT_SUCCESS;
 }
