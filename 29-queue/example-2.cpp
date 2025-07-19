@@ -24,16 +24,17 @@ void producer(std::shared_ptr<SharedData> shared_data){
 }
 
 void consumer(std::shared_ptr<SharedData> shared_data){
-    while(true){
+    bool running = true;
+    while(running) {
         std::lock_guard<std::mutex> lock(shared_data->mutex);
         if(!shared_data->queue.empty()){
             int value = shared_data->queue.front();
             shared_data->queue.pop();
             std::cout << "Consumer: " << value << "\n";
-        } else if(done ){
-            break;
+        } else if(done) {
+            running = false;
         }
-    }
+    };
 }
 
 
