@@ -87,6 +87,7 @@
     "typeindex": "cpp",
     "typeinfo": "cpp",
     "variant": "cpp",
-    "expected": "cpp"
+    "expected": "cpp",
+    "stdbool.h": "c"
   }
 }
