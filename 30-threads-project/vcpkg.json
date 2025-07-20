@@ -4,6 +4,9 @@
   "dependencies": [
     {
       "name": "boost-thread"
+    },
+    {
+        "name": "fmt"
     }
   ]
 }

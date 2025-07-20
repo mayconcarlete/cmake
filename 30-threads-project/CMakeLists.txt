@@ -7,6 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 project(main LANGUAGES CXX)
 
 find_package(Boost REQUIRED COMPONENTS thread system)
+find_package(fmt CONFIG REQUIRED)
 
 add_executable(
     main
@@ -18,6 +19,7 @@ target_link_libraries(
     PRIVATE
     Boost::thread
     Boost::system
+    fmt::fmt
 )
 
 

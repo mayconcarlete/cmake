@@ -9,6 +9,8 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "CXX_STANDARD": "c++23",
+        "CMAKE_C_COMPILER": "/usr/bin/gcc-13",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++-13",
         "CMAKE_TOOLCHAIN_FILE": "/home/maycon/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"
       }
     }
