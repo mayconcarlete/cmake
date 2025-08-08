@@ -45,7 +45,6 @@ void consumer(std::shared_ptr<SharedData> shared_data){
 }
 
 int main(){
-
     auto shared_data = std::make_shared<SharedData>();
 
     boost::thread thread_worker1(producer, shared_data);
@@ -56,5 +55,6 @@ int main(){
 
 
     std::cout << "End Threads" << "\n";
+    end:
     return EXIT_SUCCESS;   
 }
