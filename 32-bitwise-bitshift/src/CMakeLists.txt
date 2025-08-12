@@ -1,4 +1,5 @@
 add_subdirectory(and_operator)
+add_subdirectory(or_operator)
 
 add_executable(
     main
@@ -8,5 +9,6 @@ add_executable(
 target_link_libraries(
     main
     PUBLIC
-    And_Comparison    
+    and_operator
+    or_operator
 )
