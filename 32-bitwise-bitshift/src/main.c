@@ -3,6 +3,9 @@
 #include "and_operator.h"
 #include "or_operator.h"
 
+#define READ  0x01 // 0b00000001 || (1 << 0)
+#define WRITE 0x02 // 0b00000010 || (1 << 1)
+#define EXEC  0x04 // 0b00000100 || (1 << 2)
 
 
 void xor_comparison(unsigned char a, unsigned char b){
@@ -28,6 +31,9 @@ void shift_right(void){
 }
 
 
+
+
+
 int main(void){
     unsigned char a = 0b00001111; // 15 decimal
     unsigned char b = 0b00101010; // 42 decimal
@@ -37,6 +43,26 @@ int main(void){
     not_inverter(a);
     shift_left();
     shift_right();
+
+    // permission test
+    unsigned char permissions = 0x00; // 0
+    permissions |= READ;
+    permissions |= WRITE;
+    printf("Permissions enabled: %b\n", permissions);
+
+    if(permissions & READ){
+        printf("Tem leitura!\n");
+    }
+    if(permissions & EXEC) {
+        printf("Tem execução!\n");
+    }
+
+    permissions &= ~WRITE;
+    if(permissions & WRITE){
+        printf("Ta com a permissao ainda\n");
+    }else {
+        printf("Permissao foi removida!\n");
+    }
 
     return EXIT_SUCCESS;
 }
